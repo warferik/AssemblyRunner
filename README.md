@@ -6,7 +6,7 @@ Overall goal was to be able to encrypt payload on attacker system, transfer this
 
 If performed correctly, actual executed payload is never on-disk. 
 
-Functionality
+
 
 .Net Exe Run in-memory with Arguments:
 
