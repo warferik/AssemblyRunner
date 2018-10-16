@@ -1,8 +1,8 @@
 # AssemblyRunner
 
-C# Binary that can encrypt files, decrypt files, as well as retreive files over HTTP and execute said files in-memory on a target system.
+C# Binary that is deseigned to encrypt, decrypt, as well as retreive over HTTP C# assemblies and execute in-memory on a target system.
 
-Overall goal was to be able to encrypt payload on remote system, transfer this binary, and then remotely retreive encrypted binary and execute in-memory
+Overall goal was to be able to encrypt payload on attacker controlled system, transfer this binary, and then remotely retreive encrypted binary and execute in-memory on a target system.
 
 Functionality
 
