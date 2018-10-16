@@ -2,7 +2,9 @@
 
 C# Binary that is deseigned to encrypt, decrypt, as well as retreive over HTTP C# assemblies and execute in-memory on a target system.
 
-Overall goal was to be able to encrypt payload on attacker controlled system, transfer this binary, and then remotely retreive encrypted binary and execute in-memory on a target system.
+Overall goal was to be able to encrypt payload on attacker system, transfer this binary, and then remotely retreive encrypted binary and execute in-memory on a target system.
+
+If performed correctly, actual executed payload is never on-disk. 
 
 Functionality
 
