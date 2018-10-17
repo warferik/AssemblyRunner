@@ -30,14 +30,9 @@ namespace AssemblyRunner
         public static byte[] WebGet64(string fnewfile)
         {
             WebClient fclient = new WebClient();
-
-
-            WebProxy proxy = new WebProxy();
-            string[] byp = fnewfile.Split('/');
-            string bypip = byp[2];
-            List<string> bypasslist = new List<string>(proxy.BypassList);
-            bypasslist.Add(bypip);
-            proxy.BypassList = bypasslist.ToArray();
+            
+            fclient.Proxy = null;            
+            
             using (MemoryStream stream = new MemoryStream(fclient.DownloadData(fnewfile)))
             {
                 var newstr = Encoding.ASCII.GetString(stream.ToArray());
@@ -49,12 +44,7 @@ namespace AssemblyRunner
         public static string WebGetEnc(string fnewfile, string password)
         {
             WebClient client = new WebClient();
-            WebProxy proxy = new WebProxy();
-            string[] byp = fnewfile.Split('/');
-            string bypip = byp[2];
-            List<string> bypasslist = new List<string>(proxy.BypassList);
-            bypasslist.Add(bypip);
-            proxy.BypassList = bypasslist.ToArray();
+            client.Proxy = null;            
             using (MemoryStream stream = new MemoryStream(client.DownloadData(fnewfile)))
             {
                 var istream = Convert.ToBase64String(stream.ToArray());
